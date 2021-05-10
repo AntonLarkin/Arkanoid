@@ -70,5 +70,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 330eb9e0b484bda468d8abbd1438fc9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballBehaviour: {fileID: 0}
-  isReadyToReload: 0

@@ -8,7 +8,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
     #region Variables
 
     private List<GameObject> baseBlocks;
-    
+
     private int blockCount;
     private int blocksDestroyed;
 
@@ -29,6 +29,10 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         Blocks.OnCreated -= Blocks_OnCreated;
     }
 
+    private void Update()
+    {
+
+    }
 
     #endregion
 
@@ -42,8 +46,7 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         print(blockCount);
         if (blockCount <= 0)
         {
-            int index = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(index + 1);
+            SceneTransitions.GoToNextScene();
             blocksDestroyed = 0;
         }
     }
@@ -74,6 +77,8 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         blockCount += blocksDestroyed;
         blocksDestroyed = 0;
     }
+
+
 
     #endregion
 }

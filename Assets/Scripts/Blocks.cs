@@ -30,23 +30,28 @@ public class Blocks : MonoBehaviour
 
     #endregion
 
+
     #region Unity lifecycle
 
     private void OnEnable()
     {
-        GameOverSequence.OnReload += Reload;
+        GameOverSequence.OnReload += ReloadStages;
     }
- 
+
+
     private void Start()
     {
         OnCreated?.Invoke();
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (Stage == blocksByStages.Length - 1)
         {
             OnDestroyed?.Invoke(score);
+            ReloadStages();
             gameObject.SetActive(false);
+            GameOverSequence.OnReload -= ReloadStages;
             return;
         }
         blocksByStages[Stage].SetActive(false);
@@ -57,17 +62,18 @@ public class Blocks : MonoBehaviour
 
     #endregion
 
+
     #region Event handler
 
-    private void Reload()
+    private void ReloadStages()
     {
-        gameObject.SetActive(true);
         Stage = 0;
 
         for (int i = 0; i < blocksByStages.Length; i++)
         {
-            blocksByStages[i].SetActive(true);
+            blocksByStages[i].SetActive(false);
         }
+        blocksByStages[0].SetActive(true);
     }
 
     #endregion

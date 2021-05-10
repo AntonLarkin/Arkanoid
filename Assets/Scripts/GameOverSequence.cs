@@ -9,15 +9,9 @@ public class GameOverSequence : MonoBehaviour
     #region Variables
 
     private Blocks[] baseBlocksArr;
-    public BallBehaviour ballBehaviour;
-    private bool isReadyToReload;
 
-    #endregion
-
-
-    #region Properties
-
-    public bool ReadyToReload { get; set; }
+    private BallBehaviour ballBehaviour;
+    private GameManager gameManager;
 
     #endregion
 
@@ -25,6 +19,7 @@ public class GameOverSequence : MonoBehaviour
     #region Events
 
     public static event Action OnReload;
+    public static event Action OnReloadShowScore;
 
     #endregion
 
@@ -32,18 +27,51 @@ public class GameOverSequence : MonoBehaviour
     private void Start()
     {
         baseBlocksArr = FindObjectsOfType<Blocks>();
+        ballBehaviour = FindObjectOfType<BallBehaviour>();
+    }
+    private void Update()
+    {
+        gameManager = FindObjectOfType<GameManager>();      //некрасивый костыль, но работает..
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Time.timeScale = 1;
+            ReloadScene();
+            
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        OnReload?.Invoke();
-        ReadyToReload = true;
-        ballBehaviour.IsLaunched = false;
-        ballBehaviour.UpdateBallPosition();
+        if (gameManager.LivesCount == 0)
+        {
+            OnReloadShowScore?.Invoke();
+        }
+        else
+        {
+            gameManager.LoseLife();
+            ballBehaviour.IsLaunched = false;
+            ballBehaviour.UpdateBallPosition();
+        }
+
     }
 
     #endregion
 
+    public void ReloadScene()
+    {
+        OnReload?.Invoke();
+        ReloadBlocks();
+        ballBehaviour.IsLaunched = false;
+        ballBehaviour.UpdateBallPosition();
+    }
 
+    private void ReloadBlocks()
+    {
+        for (int i = 0; i < baseBlocksArr.Length; i++)
+        {
+            baseBlocksArr[i].gameObject.SetActive(true);
+        }
+    }
 }

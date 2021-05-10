@@ -39,6 +39,10 @@ public class BallBehaviour : MonoBehaviour
     private void Start()
     {
         padTransform = FindObjectOfType<PadBehaviour>().transform;
+        if (GameManager.Instance.IsAutoPlay)
+        {
+            LaunchBall();
+        }
     }
     private void Update()
     {

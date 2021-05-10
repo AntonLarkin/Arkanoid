@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2834201012081936161}
+  - {fileID: 4386601180780809212}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8f51a13f536bc438e3d8cc5795bdd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameBehaviour: {fileID: 0}
   blocksByStages:
   - {fileID: 5667070476005023734}
+  - {fileID: 6129459390768452395}
   score: 50
 --- !u!61 &2126152601302890029
 BoxCollider2D:
@@ -75,6 +76,94 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!1001 &1137188923682608085
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9196264617287694964}
+    m_Modifications:
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546032198862225662, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_Name
+      value: 'GlassBlock1 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546032198862225662, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7552915433986349642, guid: ad404a2bb3dcc264a95baf811521b7f5, type: 3}
+    - {fileID: 4705111107112389208, guid: ad404a2bb3dcc264a95baf811521b7f5, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ad404a2bb3dcc264a95baf811521b7f5, type: 3}
+--- !u!1 &6129459390768452395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6546032198862225662, guid: ad404a2bb3dcc264a95baf811521b7f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1137188923682608085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4386601180780809212 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3686281804867934249, guid: ad404a2bb3dcc264a95baf811521b7f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1137188923682608085}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1476431947706261256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,10 +221,15 @@ PrefabInstance:
       propertyPath: gameBehaviour
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5335880908616206053, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6546032198862225662, guid: ad404a2bb3dcc264a95baf811521b7f5,
         type: 3}
       propertyPath: m_Name
-      value: GlassBlock1
+      value: Glass_Blank
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7552915433986349642, guid: ad404a2bb3dcc264a95baf811521b7f5, type: 3}
