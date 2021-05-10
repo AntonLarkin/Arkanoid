@@ -20,9 +20,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     #endregion
 
+
     #region Propertiess
     public bool IsAutoPlay => isAutoPlay;
     public int LivesCount => livesCount;
+
     #endregion
 
 
@@ -41,13 +43,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Blocks.OnDestroyed -= Blocks_OnDestroyed;
         GameOverSequence.OnReload -= ReloadScore;
     }
-
     private void Start()
     {
         ReloadLives();
         ReloadScore();
     }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -58,6 +58,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     #endregion
 
+
     #region Public methods
     public void LoseLife()
     {
@@ -67,6 +68,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     #endregion
 
+
     #region Private methods
 
     private void AddScore(int score)
@@ -74,7 +76,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         this.score += score;
         UpdateScoreLabel();
     }
-
     private void UpdateScoreLabel()
     {
         scoreLabel.text = score.ToString();
@@ -82,27 +83,25 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     #endregion
 
+
     #region Event handler
     private void Blocks_OnDestroyed(int score)
     {
         AddScore(score);
     }
-
     private void ReloadScore()
     {
         score = 0;
         UpdateScoreLabel();
     }
-
     private void ReloadLives()
     {
         livesCount = 2;
-        for(int i = 0; i < livesKeeper.Length; i++)
+        for (int i = 0; i < livesKeeper.Length; i++)
         {
             livesKeeper[i].SetActive(true);
         }
     }
-
     private void ShowFinalScore()
     {
         gameOverView.SetActive(true);

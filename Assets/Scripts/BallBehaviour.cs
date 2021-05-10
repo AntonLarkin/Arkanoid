@@ -15,7 +15,7 @@ public class BallBehaviour : MonoBehaviour
     [SerializeField] private float startPositionY;
     [SerializeField] private float startDirectionY;
 
-    [Range(-5,0)]
+    [Range(-5, 0)]
     [SerializeField] private float minValueX;
 
     [Range(0, 5)]
@@ -39,6 +39,7 @@ public class BallBehaviour : MonoBehaviour
     private void Start()
     {
         padTransform = FindObjectOfType<PadBehaviour>().transform;
+
         if (GameManager.Instance.IsAutoPlay)
         {
             LaunchBall();
@@ -80,7 +81,6 @@ public class BallBehaviour : MonoBehaviour
 
 
     #region Public methods
-
     public void UpdateBallPosition()
     {
         Vector3 padPosition = padTransform.position;

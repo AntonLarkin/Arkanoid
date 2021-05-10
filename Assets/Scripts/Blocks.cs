@@ -9,41 +9,33 @@ public class Blocks : MonoBehaviour
     #region Variables
 
     [SerializeField] private GameObject[] blocksByStages;
-
     [SerializeField] private int score;
-
-
 
     #endregion
 
 
     #region Properties
-
     public int Stage { get; set; }
 
     #endregion
 
-    #region Events 
 
+    #region Events 
     public static event Action OnCreated;
-    public static event Action <int> OnDestroyed;
+    public static event Action<int> OnDestroyed;
 
     #endregion
 
 
     #region Unity lifecycle
-
     private void OnEnable()
     {
         GameOverSequence.OnReload += ReloadStages;
     }
-
-
     private void Start()
     {
         OnCreated?.Invoke();
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (Stage == blocksByStages.Length - 1)
@@ -54,17 +46,16 @@ public class Blocks : MonoBehaviour
             GameOverSequence.OnReload -= ReloadStages;
             return;
         }
+
         blocksByStages[Stage].SetActive(false);
         Stage++;
         blocksByStages[Stage].SetActive(true);
-
     }
 
     #endregion
 
 
     #region Event handler
-
     private void ReloadStages()
     {
         Stage = 0;
@@ -73,6 +64,7 @@ public class Blocks : MonoBehaviour
         {
             blocksByStages[i].SetActive(false);
         }
+
         blocksByStages[0].SetActive(true);
     }
 

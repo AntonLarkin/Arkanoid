@@ -23,6 +23,7 @@ public class GameOverSequence : MonoBehaviour
 
     #endregion
 
+
     #region Unity lifecycles
     private void Start()
     {
@@ -37,10 +38,8 @@ public class GameOverSequence : MonoBehaviour
         {
             Time.timeScale = 1;
             ReloadScene();
-            
         }
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -54,11 +53,24 @@ public class GameOverSequence : MonoBehaviour
             ballBehaviour.IsLaunched = false;
             ballBehaviour.UpdateBallPosition();
         }
-
     }
 
     #endregion
 
+
+    #region Private methods
+    private void ReloadBlocks()
+    {
+        for (int i = 0; i < baseBlocksArr.Length; i++)
+        {
+            baseBlocksArr[i].gameObject.SetActive(true);
+        }
+    }
+
+    #endregion
+
+
+    #region Public methods
     public void ReloadScene()
     {
         OnReload?.Invoke();
@@ -67,11 +79,5 @@ public class GameOverSequence : MonoBehaviour
         ballBehaviour.UpdateBallPosition();
     }
 
-    private void ReloadBlocks()
-    {
-        for (int i = 0; i < baseBlocksArr.Length; i++)
-        {
-            baseBlocksArr[i].gameObject.SetActive(true);
-        }
-    }
+    #endregion
 }

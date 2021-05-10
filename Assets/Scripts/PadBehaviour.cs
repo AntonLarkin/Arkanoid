@@ -16,6 +16,7 @@ public class PadBehaviour : MonoBehaviour
     private Vector3 padPosition = Vector3.zero;
     #endregion
 
+
     #region Unity lifecycle
     private void Start()
     {
@@ -40,6 +41,8 @@ public class PadBehaviour : MonoBehaviour
 
     #endregion
 
+
+    #region Private methods
     private void MovePad(bool isPaused)
     {
         if (!isPaused)
@@ -56,4 +59,6 @@ public class PadBehaviour : MonoBehaviour
         padPosition.x = Mathf.Clamp(padPosition.x, minX, maxX);
         transform.position = padPosition;
     }
+
+    #endregion
 }

@@ -29,21 +29,17 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         Blocks.OnCreated -= Blocks_OnCreated;
     }
 
-    private void Update()
-    {
-
-    }
-
     #endregion
 
 
-    #region Public methods
+    #region Private methods
 
     private void BlockDestroyed()
     {
         blockCount--;
         blocksDestroyed++;
         print(blockCount);
+
         if (blockCount <= 0)
         {
             SceneTransitions.GoToNextScene();
@@ -59,26 +55,23 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
     #endregion
 
+
     #region Event handlers
 
     private void Blocks_OnDestroyed(int score)
     {
         BlockDestroyed();
     }
-
     private void Blocks_OnCreated()
     {
 
         BlockCreated();
     }
-
     private void ReloadCountOfBlocks()
     {
         blockCount += blocksDestroyed;
         blocksDestroyed = 0;
     }
-
-
 
     #endregion
 }
