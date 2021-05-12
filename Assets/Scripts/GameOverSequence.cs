@@ -29,29 +29,30 @@ public class GameOverSequence : MonoBehaviour
     {
         baseBlocksArr = FindObjectsOfType<Blocks>();
         ballBehaviour = FindObjectOfType<BallBehaviour>();
+        gameManager = GameManager.Instance;
     }
+
     private void Update()
     {
-        gameManager = FindObjectOfType<GameManager>();      //некрасивый костыль, но работает..
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Time.timeScale = 1;
             ReloadScene();
+            PauseManager.Instance.ToggleFreezeScreen();
         }
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         if (gameManager.LivesCount == 0)
         {
             OnReloadShowScore?.Invoke();
+            ballBehaviour.RestartBallPosition();
+            PauseManager.Instance.ToggleFreezeScreen();
         }
         else
         {
             gameManager.LoseLife();
-            ballBehaviour.IsLaunched = false;
-            ballBehaviour.UpdateBallPosition();
+            ballBehaviour.RestartBallPosition();
         }
     }
 
@@ -63,7 +64,7 @@ public class GameOverSequence : MonoBehaviour
     {
         for (int i = 0; i < baseBlocksArr.Length; i++)
         {
-            baseBlocksArr[i].gameObject.SetActive(true);
+            baseBlocksArr[i].ResetBlocks();
         }
     }
 
@@ -73,10 +74,10 @@ public class GameOverSequence : MonoBehaviour
     #region Public methods
     public void ReloadScene()
     {
-        OnReload?.Invoke();
+        ballBehaviour.RestartBallPosition();
         ReloadBlocks();
-        ballBehaviour.IsLaunched = false;
-        ballBehaviour.UpdateBallPosition();
+
+        OnReload?.Invoke();
     }
 
     #endregion

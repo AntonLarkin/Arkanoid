@@ -15,8 +15,13 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
 
     #endregion
 
+    #region Properties
+
     public bool IsPaused => isPaused;
     public bool IsPauseViewActive => isPauseViewActive;
+
+    #endregion
+
 
     #region Unity lifecycle
 
@@ -27,8 +32,6 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
             if (!isPauseViewActive)
             {
                 Toggle();
-                pauseView.SetActive(true);
-                isPauseViewActive = true;
             }
         }
     }
@@ -40,21 +43,26 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
 
     public void Toggle()
     {
+        ToggleFreezeScreen();
 
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : 1f;
+        pauseView.SetActive(isPaused);
+        isPauseViewActive = isPaused;
     }
+
     public void ContinueGame()
     {
         Toggle();
-        pauseView.SetActive(false);
-        isPauseViewActive = false;
     }
+
     public void EndGame()
     {
         Toggle();
-        pauseView.SetActive(false);
-        isPauseViewActive = false;
+    }
+
+    public void ToggleFreezeScreen()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0f : 1f;
     }
 
     #endregion

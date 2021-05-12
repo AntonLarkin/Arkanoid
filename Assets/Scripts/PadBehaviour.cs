@@ -11,9 +11,8 @@ public class PadBehaviour : MonoBehaviour
     [SerializeField] private float maxX;
 
     private Transform ballTransform;
-    private BallBehaviour ball;
 
-    private Vector3 padPosition = Vector3.zero;
+
     #endregion
 
 
@@ -21,13 +20,16 @@ public class PadBehaviour : MonoBehaviour
     private void Start()
     {
         ballTransform = FindObjectOfType<BallBehaviour>().transform;
-        ball = FindObjectOfType<BallBehaviour>();
     }
     private void Update()
     {
+        if (PauseManager.Instance.IsPaused)
+        {
+            return;
+        }
         if (GameManager.Instance.IsAutoPlay)
         {
-            Vector3 autoPlayPadPosition = ball.transform.position;
+            Vector3 autoPlayPadPosition = ballTransform.position;
             autoPlayPadPosition.y = transform.position.y;
 
             autoPlayPadPosition.x = Mathf.Clamp(autoPlayPadPosition.x, minX, maxX);
@@ -35,7 +37,7 @@ public class PadBehaviour : MonoBehaviour
         }
         else
         {
-            MovePad(PauseManager.Instance.IsPaused);
+            MovePad();
         }
     }
 
@@ -43,16 +45,15 @@ public class PadBehaviour : MonoBehaviour
 
 
     #region Private methods
-    private void MovePad(bool isPaused)
+
+    private void MovePad()
     {
-        if (!isPaused)
-        {
-            Vector3 positionInPixels = Input.mousePosition;
-            Vector3 positionInWorld = Camera.main.ScreenToWorldPoint(positionInPixels);
+        Vector3 padPosition = Vector3.zero;
 
-            padPosition = positionInWorld;
-        }
+        Vector3 positionInPixels = Input.mousePosition;
+        Vector3 positionInWorld = Camera.main.ScreenToWorldPoint(positionInPixels);
 
+        padPosition = positionInWorld;
         padPosition.y = transform.position.y;
         padPosition.z = transform.position.z;
 

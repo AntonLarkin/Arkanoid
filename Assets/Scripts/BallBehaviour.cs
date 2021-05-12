@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BallBehaviour : MonoBehaviour
 {
@@ -29,7 +27,7 @@ public class BallBehaviour : MonoBehaviour
 
     #region Properties
 
-    public bool IsLaunched { get; set; }
+    public bool IsLaunched { get; private set; }
 
     #endregion
 
@@ -61,6 +59,23 @@ public class BallBehaviour : MonoBehaviour
     #endregion
 
 
+    #region Public methods
+    public void UpdateBallPosition()
+    {
+        Vector3 padPosition = padTransform.position;
+        padPosition.y = startPositionY;
+        transform.position = padPosition;
+    }
+
+    public void RestartBallPosition()
+    {
+        IsLaunched = false;
+        UpdateBallPosition();
+    }
+
+    #endregion
+
+
     #region Private methods
 
     private void LaunchBall()
@@ -75,18 +90,6 @@ public class BallBehaviour : MonoBehaviour
         Vector2 direction = new Vector2(xPosition, startDirectionY).normalized;
         Vector2 velocity = direction * speed;
         return velocity;
-    }
-
-    #endregion
-
-
-    #region Public methods
-    public void UpdateBallPosition()
-    {
-        Vector3 padPosition = padTransform.position;
-        //padPosition.y = transform.position.y;
-        padPosition.y = startPositionY;
-        transform.position = padPosition;
     }
 
     #endregion

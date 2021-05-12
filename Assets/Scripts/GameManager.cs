@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     #region Variables
+
     [Header("Game UI")]
     [SerializeField] private Text scoreLabel;
     [SerializeField] private GameObject gameOverView;
@@ -17,6 +18,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private int score;
     private int livesCount;
+    private bool isGameStarted;
 
     #endregion
 
@@ -24,30 +26,35 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     #region Propertiess
     public bool IsAutoPlay => isAutoPlay;
     public int LivesCount => livesCount;
+    public bool IsGameStarted => isGameStarted;
 
     #endregion
 
 
     #region Unity lifecycle
+
     private void OnEnable()
     {
-        GameOverSequence.OnReloadShowScore += ShowFinalScore;
         GameOverSequence.OnReload += ReloadLives;
         GameOverSequence.OnReload += ReloadScore;
+        GameOverSequence.OnReloadShowScore += ShowFinalScore;
         Blocks.OnDestroyed += Blocks_OnDestroyed;
     }
+
     private void OnDisable()
     {
-        GameOverSequence.OnReloadShowScore -= ShowFinalScore;
         GameOverSequence.OnReload -= ReloadLives;
-        Blocks.OnDestroyed -= Blocks_OnDestroyed;
         GameOverSequence.OnReload -= ReloadScore;
+        GameOverSequence.OnReloadShowScore -= ShowFinalScore;
+        Blocks.OnDestroyed -= Blocks_OnDestroyed;
     }
+
     private void Start()
     {
         ReloadLives();
         ReloadScore();
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -60,10 +67,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
 
     #region Public methods
+
     public void LoseLife()
     {
         livesKeeper[livesCount].SetActive(false);
         livesCount--;
+    }
+
+    public void StartGame()
+    {
+        if (!isGameStarted)
+        {
+            isGameStarted = true;
+            SceneTransitions.GoToStartScene();
+        }
     }
 
     #endregion
@@ -76,6 +93,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         this.score += score;
         UpdateScoreLabel();
     }
+
     private void UpdateScoreLabel()
     {
         scoreLabel.text = score.ToString();
@@ -85,27 +103,32 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
 
     #region Event handler
+
     private void Blocks_OnDestroyed(int score)
     {
         AddScore(score);
     }
+
     private void ReloadScore()
     {
         score = 0;
         UpdateScoreLabel();
     }
+
     private void ReloadLives()
     {
         livesCount = 2;
+
         for (int i = 0; i < livesKeeper.Length; i++)
         {
             livesKeeper[i].SetActive(true);
         }
     }
+
     private void ShowFinalScore()
     {
         gameOverView.SetActive(true);
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         finalScoreLabel.text = ($"Your final score is : {score.ToString()}\n PRESS <SPACE> TO RESTART");
     }
 
