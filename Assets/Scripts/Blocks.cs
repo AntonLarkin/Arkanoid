@@ -23,12 +23,14 @@ public class Blocks : MonoBehaviour
 
 
     #region Properties
+
     public int Stage { get; set; }
 
     #endregion
 
 
     #region Unity lifecycle
+
     private void OnEnable()
     {
         GameOverSequence.OnReload += ReloadStages;
@@ -52,6 +54,7 @@ public class Blocks : MonoBehaviour
             gameObject.SetActive(false);
 
             OnDestroyed?.Invoke(score);
+
             return;
         }
 
@@ -62,6 +65,7 @@ public class Blocks : MonoBehaviour
 
     #endregion
 
+
     #region Public methods
 
     public void ResetBlocks()
@@ -71,14 +75,16 @@ public class Blocks : MonoBehaviour
 
     #endregion
 
+
     #region Event handler
+
     private void ReloadStages()
     {
         Stage = 0;
 
         for (int i = 0; i < blocksByStages.Length; i++)
         {
-            blocksByStages[i].SetActive(i==0);
+            blocksByStages[i].SetActive(i == 0);
         }
     }
 

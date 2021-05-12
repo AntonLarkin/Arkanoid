@@ -16,14 +16,18 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
 
     #region Unity lifecycle
+
     private void OnEnable()
     {
+        UiManager.OnExitButtonClicked += ReloadBlockCount;
         GameOverSequence.OnReload += ReloadCountOfBlocks;
         Blocks.OnDestroyed += Blocks_OnDestroyed;
         Blocks.OnCreated += Blocks_OnCreated;
     }
+
     private void OnDisable()
     {
+        UiManager.OnExitButtonClicked -= ReloadBlockCount;
         GameOverSequence.OnReload -= ReloadCountOfBlocks;
         Blocks.OnDestroyed -= Blocks_OnDestroyed;
         Blocks.OnCreated -= Blocks_OnCreated;
@@ -62,14 +66,22 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
     {
         BlockDestroyed();
     }
+
     private void Blocks_OnCreated()
     {
 
         BlockCreated();
     }
+
     private void ReloadCountOfBlocks()
     {
         blockCount += blocksDestroyed;
+        blocksDestroyed = 0;
+    }
+
+    private void ReloadBlockCount()
+    {
+        blockCount = 0;
         blocksDestroyed = 0;
     }
 

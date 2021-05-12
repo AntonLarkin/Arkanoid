@@ -6,14 +6,11 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
 {
     #region Variables
 
-    [SerializeField] private GameObject pauseView;
-    [SerializeField] private Button continueButton;
-    [SerializeField] private Button exitButton;
-
     private bool isPaused;
     private bool isPauseViewActive;
 
     #endregion
+
 
     #region Properties
 
@@ -24,6 +21,20 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
 
 
     #region Unity lifecycle
+
+    private void OnEnable()
+    {
+        UiManager.OnExitButtonClicked += EndGame;
+        UiManager.OnContinueButtonClicked += ContinueGame;
+        GameOverSequence.OnReloadShowScore += ToggleFreezeScreen;
+    }
+
+    private void OnDisable()
+    {
+        UiManager.OnExitButtonClicked -= EndGame;
+        UiManager.OnContinueButtonClicked -= ContinueGame;
+        GameOverSequence.OnReloadShowScore -= ToggleFreezeScreen;
+    }
 
     private void Update()
     {
@@ -45,16 +56,16 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
     {
         ToggleFreezeScreen();
 
-        pauseView.SetActive(isPaused);
+        UiManager.Instance.SetPauseViewActive(isPaused);
         isPauseViewActive = isPaused;
     }
 
-    public void ContinueGame()
+    private void ContinueGame()
     {
         Toggle();
     }
 
-    public void EndGame()
+    private void EndGame()
     {
         Toggle();
     }
@@ -66,6 +77,4 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
     }
 
     #endregion
-
-
 }

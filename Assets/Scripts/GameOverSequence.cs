@@ -9,9 +9,10 @@ public class GameOverSequence : MonoBehaviour
     #region Variables
 
     private Blocks[] baseBlocksArr;
-
     private BallBehaviour ballBehaviour;
     private GameManager gameManager;
+
+    private bool isReadyToReload;
 
     #endregion
 
@@ -25,6 +26,17 @@ public class GameOverSequence : MonoBehaviour
 
 
     #region Unity lifecycles
+
+    private void OnEnable()
+    {
+        UiManager.OnExitButtonClicked += ReloadScene;
+    }
+
+    private void OnDisable()
+    {
+        UiManager.OnExitButtonClicked -= ReloadScene;
+    }
+
     private void Start()
     {
         baseBlocksArr = FindObjectsOfType<Blocks>();
@@ -32,26 +44,27 @@ public class GameOverSequence : MonoBehaviour
         gameManager = GameManager.Instance;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ReloadScene();
-            PauseManager.Instance.ToggleFreezeScreen();
-        }
-    }
+    // private void Update()                                        
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Space)&&isReadyToReload)
+    //     {
+    //         ReloadScene();
+    //        PauseManager.Instance.ToggleFreezeScreen();
+    //    }
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (gameManager.LivesCount == 0)
+        if (LivesManager.Instance.LivesCount < 0)
         {
-            OnReloadShowScore?.Invoke();
             ballBehaviour.RestartBallPosition();
-            PauseManager.Instance.ToggleFreezeScreen();
+            isReadyToReload = true;
+
+            OnReloadShowScore?.Invoke();
         }
         else
         {
-            gameManager.LoseLife();
+            LivesManager.Instance.LoseLife();
             ballBehaviour.RestartBallPosition();
         }
     }
@@ -68,17 +81,15 @@ public class GameOverSequence : MonoBehaviour
         }
     }
 
-    #endregion
-
-
-    #region Public methods
-    public void ReloadScene()
+    private void ReloadScene()
     {
         ballBehaviour.RestartBallPosition();
         ReloadBlocks();
+        isReadyToReload = false;
 
         OnReload?.Invoke();
     }
 
     #endregion
+
 }

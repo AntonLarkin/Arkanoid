@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public static class SceneTransitions
 {
-
     #region Public methods
 
     public static void GoToNextScene()
@@ -22,6 +21,11 @@ public static class SceneTransitions
     public static void GoToStartScene()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public static void GoToFirstScene()
+    {
+        SceneManager.LoadScene(1);
     }
 
     #endregion

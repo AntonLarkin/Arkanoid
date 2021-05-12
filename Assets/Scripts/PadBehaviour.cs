@@ -12,21 +12,23 @@ public class PadBehaviour : MonoBehaviour
 
     private Transform ballTransform;
 
-
     #endregion
 
 
     #region Unity lifecycle
+
     private void Start()
     {
         ballTransform = FindObjectOfType<BallBehaviour>().transform;
     }
+
     private void Update()
     {
         if (PauseManager.Instance.IsPaused)
         {
             return;
         }
+
         if (GameManager.Instance.IsAutoPlay)
         {
             Vector3 autoPlayPadPosition = ballTransform.position;
