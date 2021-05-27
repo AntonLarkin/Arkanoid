@@ -24,16 +24,12 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
 
     private void OnEnable()
     {
-        UiManager.OnExitButtonClicked += EndGame;
-        UiManager.OnContinueButtonClicked += ContinueGame;
-        GameOverSequence.OnReloadShowScore += ToggleFreezeScreen;
+        SceneLoader.OnContinueButtonClicked += OnContinueButtonClicked_ContinueGame;
     }
 
     private void OnDisable()
     {
-        UiManager.OnExitButtonClicked -= EndGame;
-        UiManager.OnContinueButtonClicked -= ContinueGame;
-        GameOverSequence.OnReloadShowScore -= ToggleFreezeScreen;
+        SceneLoader.OnContinueButtonClicked -= OnContinueButtonClicked_ContinueGame;
     }
 
     private void Update()
@@ -54,26 +50,21 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
 
     public void Toggle()
     {
-        ToggleFreezeScreen();
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0f : 1f;
 
         UiManager.Instance.SetPauseViewActive(isPaused);
         isPauseViewActive = isPaused;
     }
 
-    private void ContinueGame()
+    #endregion
+
+
+    #region Event handlers
+
+    private void OnContinueButtonClicked_ContinueGame()
     {
         Toggle();
-    }
-
-    private void EndGame()
-    {
-        Toggle();
-    }
-
-    public void ToggleFreezeScreen()
-    {
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : 1f;
     }
 
     #endregion

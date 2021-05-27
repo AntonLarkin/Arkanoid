@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 9196264617287694964}
   - component: {fileID: 4415895915433615487}
   - component: {fileID: 2126152601302890029}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GlassBlock
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +50,22 @@ MonoBehaviour:
   - {fileID: 5667070476005023734}
   - {fileID: 6129459390768452395}
   score: 50
+  destroyParticlePrefab: {fileID: 2519294226295906966, guid: 59fb81a3cee02264ba36477e2968d547,
+    type: 3}
+  pickUpPrefabs:
+  - {fileID: 2471318318881323025, guid: 1841f3b7c483ef44b8a876ca0c927fa3, type: 3}
+  - {fileID: 6619197427812758345, guid: 0d33409b0729f8640a59052984676f81, type: 3}
+  - {fileID: 2471318318881323025, guid: 52545afc5403c7f4cb3ed988144784b9, type: 3}
+  - {fileID: 6619197427812758345, guid: d491d2af4a73efa4abf6420807e6fffa, type: 3}
+  - {fileID: 6619197427812758345, guid: e598ba1f67d2d4f4395fc777507cf8f8, type: 3}
+  - {fileID: 6619197427812758345, guid: 72891f815eb11074cb143e8ebcfebc88, type: 3}
+  - {fileID: 2471318318881323025, guid: c480981f0f9a3c148bd61e18f6bf0413, type: 3}
+  - {fileID: 2471318318881323025, guid: 264c61acb56cfcc47a726915cab06cbd, type: 3}
+  - {fileID: 2471318318881323025, guid: 9b699cb1fcd357a48a6c43cc51d14c5b, type: 3}
+  - {fileID: 6619197427812758345, guid: ec30f5fd289a26b488782efbbb481a81, type: 3}
+  - {fileID: 6619197427812758345, guid: 9829e784583b42142894a19142e89213, type: 3}
+  - {fileID: 2471318318881323025, guid: 0e3d1eca2fadf4c4faeb82faa5ef6323, type: 3}
+  pickUpCreationRate: 10
 --- !u!61 &2126152601302890029
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,10 +154,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5335880908616206053, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6546032198862225662, guid: ad404a2bb3dcc264a95baf811521b7f5,
         type: 3}
       propertyPath: m_Name
       value: 'GlassBlock1 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546032198862225662, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6546032198862225662, guid: ad404a2bb3dcc264a95baf811521b7f5,
         type: 3}
@@ -230,6 +256,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Glass_Blank
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546032198862225662, guid: ad404a2bb3dcc264a95baf811521b7f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7552915433986349642, guid: ad404a2bb3dcc264a95baf811521b7f5, type: 3}

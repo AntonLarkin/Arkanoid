@@ -9,6 +9,8 @@ public class PadBehaviour : MonoBehaviour
     [SerializeField] private float maxX;
 
     private Transform ballTransform;
+    private float baseMinX;
+    private float baseMaxX;
 
     #endregion
 
@@ -18,6 +20,9 @@ public class PadBehaviour : MonoBehaviour
     private void Start()
     {
         ballTransform = FindObjectOfType<BallBehaviour>().transform;
+
+        baseMinX = minX;
+        baseMaxX = maxX;
     }
 
     private void Update()
@@ -43,6 +48,25 @@ public class PadBehaviour : MonoBehaviour
 
     #endregion
 
+
+    #region Public methods
+
+    public void ScalePadWidth(float widthModifier, float borderDifference)
+    {
+        Vector3 scaledPad = new Vector3 (widthModifier, 1, 1);
+        transform.localScale = scaledPad;
+        minX -= borderDifference;
+        maxX += borderDifference;
+    }
+
+    public void ReloadPadWidth()
+    {
+        transform.localScale = new Vector3(1, 1, 1);
+        minX = baseMinX;
+        maxX = baseMaxX;
+    }
+
+    #endregion
 
     #region Private methods
 

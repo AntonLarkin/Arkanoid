@@ -7,6 +7,7 @@ public class GameOverSequence : MonoBehaviour
 
     private Blocks[] baseBlocksArr;
     private BallBehaviour ballBehaviour;
+    private PadBehaviour pad;
     private GameManager gameManager;
 
     private bool isReadyToReload;
@@ -17,7 +18,7 @@ public class GameOverSequence : MonoBehaviour
     #region Events
 
     public static event Action OnReload;
-    public static event Action OnReloadShowScore;
+    public static event Action OnDefeatEndGame;
 
     #endregion
 
@@ -26,43 +27,38 @@ public class GameOverSequence : MonoBehaviour
 
     private void OnEnable()
     {
-        UiManager.OnExitButtonClicked += ReloadScene;
+        SceneLoader.OnExitButtonClicked += OnExitButtonClicked_ReloadScene;
     }
 
     private void OnDisable()
     {
-        UiManager.OnExitButtonClicked -= ReloadScene;
+        SceneLoader.OnExitButtonClicked -= OnExitButtonClicked_ReloadScene;
     }
 
     private void Start()
     {
         baseBlocksArr = FindObjectsOfType<Blocks>();
+        pad = FindObjectOfType<PadBehaviour>();
         ballBehaviour = FindObjectOfType<BallBehaviour>();
         gameManager = GameManager.Instance;
     }
 
-    // private void Update()                                        
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Space)&&isReadyToReload)
-    //     {
-    //         ReloadScene();
-    //        PauseManager.Instance.ToggleFreezeScreen();
-    //    }
-    //}
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (LivesManager.Instance.LivesCount < 0)
+        LivesManager.Instance.LoseLife();
+
+        if (LivesManager.Instance.LivesCount == 0)
         {
-            ballBehaviour.RestartBallPosition();
+            ballBehaviour.RestartBall();
+            ballBehaviour.ReloadBallSize();
             isReadyToReload = true;
 
-            OnReloadShowScore?.Invoke();
+            OnDefeatEndGame?.Invoke();
         }
         else
         {
-            LivesManager.Instance.LoseLife();
-            ballBehaviour.RestartBallPosition();
+            pad.ReloadPadWidth();
+            ballBehaviour.RestartBall();
         }
     }
 
@@ -70,6 +66,7 @@ public class GameOverSequence : MonoBehaviour
 
 
     #region Private methods
+
     private void ReloadBlocks()
     {
         for (int i = 0; i < baseBlocksArr.Length; i++)
@@ -78,9 +75,14 @@ public class GameOverSequence : MonoBehaviour
         }
     }
 
-    private void ReloadScene()
+    #endregion
+
+
+    #region Event handlers
+
+    private void OnExitButtonClicked_ReloadScene()
     {
-        ballBehaviour.RestartBallPosition();
+        ballBehaviour.RestartBall();
         ReloadBlocks();
         isReadyToReload = false;
 

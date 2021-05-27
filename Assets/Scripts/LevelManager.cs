@@ -17,16 +17,16 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
     private void OnEnable()
     {
-        UiManager.OnExitButtonClicked += ReloadBlockCount;
-        GameOverSequence.OnReload += ReloadCountOfBlocks;
+        SceneLoader.OnExitButtonClicked += OnExitButtonClicked_ReloadBlockCount;
+        GameOverSequence.OnReload += OnReload_ReloadCountOfBlocks;
         Blocks.OnDestroyed += Blocks_OnDestroyed;
         Blocks.OnCreated += Blocks_OnCreated;
     }
 
     private void OnDisable()
     {
-        UiManager.OnExitButtonClicked -= ReloadBlockCount;
-        GameOverSequence.OnReload -= ReloadCountOfBlocks;
+        SceneLoader.OnExitButtonClicked -= OnExitButtonClicked_ReloadBlockCount;
+        GameOverSequence.OnReload -= OnReload_ReloadCountOfBlocks;
         Blocks.OnDestroyed -= Blocks_OnDestroyed;
         Blocks.OnCreated -= Blocks_OnCreated;
     }
@@ -40,11 +40,10 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
     {
         blockCount--;
         blocksDestroyed++;
-        print(blockCount);
 
         if (blockCount <= 0)
         {
-            SceneTransitions.GoToNextScene();
+            SceneLoader.GoToNextScene();
             blocksDestroyed = 0;
         }
     }
@@ -52,7 +51,6 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
     private void BlockCreated()
     {
         blockCount++;
-        Debug.Log(blockCount);
     }
 
     #endregion
@@ -71,13 +69,13 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
         BlockCreated();
     }
 
-    private void ReloadCountOfBlocks()
+    private void OnReload_ReloadCountOfBlocks()
     {
         blockCount += blocksDestroyed;
         blocksDestroyed = 0;
     }
 
-    private void ReloadBlockCount()
+    private void OnExitButtonClicked_ReloadBlockCount()
     {
         blockCount = 0;
         blocksDestroyed = 0;

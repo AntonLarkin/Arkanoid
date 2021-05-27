@@ -21,17 +21,17 @@ public class LivesManager : SingletonMonoBehaviour<LivesManager>
 
     private void OnEnable()
     {
-        GameOverSequence.OnReload += ReloadLives;
+        SceneLoader.OnExitButtonClicked += OnExitButtonClicked_ReloadLives;
     }
 
     private void OnDisable()
     {
-        GameOverSequence.OnReload -= ReloadLives;
+        SceneLoader.OnExitButtonClicked -= OnExitButtonClicked_ReloadLives;
     }
 
     private void Start()
     {
-        ReloadLives();
+        OnExitButtonClicked_ReloadLives();
     }
 
     private void Update()
@@ -49,8 +49,19 @@ public class LivesManager : SingletonMonoBehaviour<LivesManager>
 
     public void LoseLife()
     {
-        livesKeeper[livesCount].SetActive(false);
         livesCount--;
+        livesKeeper[livesCount].SetActive(false);
+    }
+
+    public void AddLife()
+    {
+        if (livesCount == livesKeeper.Length)
+        {
+            return;
+        }
+
+        livesKeeper[livesCount].SetActive(true);
+        livesCount++;
     }
 
     #endregion
@@ -58,36 +69,13 @@ public class LivesManager : SingletonMonoBehaviour<LivesManager>
 
     #region Event handler
 
-    private void ReloadLives()
+    private void OnExitButtonClicked_ReloadLives()
     {
-        livesCount = 2;
+        livesCount = livesKeeper.Length;
 
         for (int i = 0; i < livesKeeper.Length; i++)
         {
             livesKeeper[i].SetActive(true);
-        }
-    }
-
-    private void AddLife()
-    {
-        if (livesCount == 1)
-        {
-            ReloadLives();
-
-        }
-        else if (livesCount == 0)
-        {
-            livesCount = 1;
-
-            for (int i = 0; i <= livesCount; i++)
-            {
-                livesKeeper[i].SetActive(true);
-            }
-        }
-        else if (livesCount == -1)
-        {
-            livesCount = 0;
-            livesKeeper[0].SetActive(true);
         }
     }
 

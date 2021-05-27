@@ -7,13 +7,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [Header("AutoPlay")]
     [SerializeField] private bool isAutoPlay;
 
-    private int score;
-
     #endregion
 
 
     #region Propertiess
 
+    public int Score { get; private set; }
     public bool IsAutoPlay => isAutoPlay;
 
     #endregion
@@ -23,35 +22,37 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void OnEnable()
     {
+        SceneLoader.OnExitButtonClicked += ReloadScore;
         GameOverSequence.OnReload += ReloadScore;
-        GameOverSequence.OnReloadShowScore += ShowFinalScore;
         Blocks.OnDestroyed += Blocks_OnDestroyed;
     }
 
     private void OnDisable()
     {
+        SceneLoader.OnExitButtonClicked -= ReloadScore;
         GameOverSequence.OnReload -= ReloadScore;
-        GameOverSequence.OnReloadShowScore -= ShowFinalScore;
         Blocks.OnDestroyed -= Blocks_OnDestroyed;
     }
-
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        UiManager.Instance.SetGameOverViewActive(false);
-    //     }
-    //}
 
     #endregion
 
 
-    #region Private methods
+    #region Public methods
 
-    private void AddScore(int score)
+    public void AddScore(int score)
     {
-        this.score += score;
-        UiManager.Instance.UpdateScoreLabel(this.score);
+        Debug.Log(Score);
+        Debug.Log(score);
+
+        if (score < 0 && -score > Score)
+        {
+            ReloadScore();
+        }
+        else
+        {
+            this.Score += score;
+            UiManager.Instance.UpdateScoreLabel(Score);
+        }
     }
 
     #endregion
@@ -66,14 +67,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void ReloadScore()
     {
-        score = 0;
-        UiManager.Instance.UpdateScoreLabel(score);
-    }
-
-    private void ShowFinalScore()
-    {
-        UiManager.Instance.SetGameOverViewActive(true);
-        UiManager.Instance.UpdateFinalScoreLabel(score);
+        Score = 0;
+        UiManager.Instance.UpdateScoreLabel(Score);
     }
 
     #endregion

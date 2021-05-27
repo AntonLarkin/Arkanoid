@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1632e227dc8cf8048a06906b00b9756a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5, g: 0.4740566, b: 0.49233532, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,14 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8f51a13f536bc438e3d8cc5795bdd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameBehaviour: {fileID: 8435746322763190177, guid: 2902982af1a03374f93e0084881be6f9,
-    type: 3}
-  blocksLifecycle:
-  - {fileID: 1617445545431014799, guid: c81df20b6c6353742a140cf6e0f0f1f4, type: 3}
-  - {fileID: 6647072818370114901, guid: 27b79ae10ccd1834ebf6c4afbfb91637, type: 3}
-  - {fileID: 1259825188691702037, guid: 59d869ed06ce9b646b931958415a5f99, type: 3}
-  - {fileID: 7630664694743849792}
-  pointsForDestruction: 150
+  blocksByStages: []
+  score: 0
+  destroyParticlePrefab: {fileID: 0}
+  pickUpPrefabs: []
+  pickUpCreationRate: 0
 --- !u!58 &-337246804007025142
 CircleCollider2D:
   m_ObjectHideFlags: 0

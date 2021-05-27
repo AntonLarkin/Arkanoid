@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using Random = UnityEngine.Random;
 
 public class Blocks : MonoBehaviour
 {
@@ -8,6 +9,15 @@ public class Blocks : MonoBehaviour
 
     [SerializeField] private GameObject[] blocksByStages;
     [SerializeField] private int score;
+
+    [SerializeField] private GameObject destroyParticlePrefab;
+
+    [Header("Pick Up")]
+    [SerializeField] private GameObject[] pickUpPrefabs;
+    private GameObject pickUpPrefab;
+
+    [Range(1,100)]
+    [SerializeField] private int pickUpCreationRate;
 
     #endregion
 
@@ -23,6 +33,7 @@ public class Blocks : MonoBehaviour
     #region Properties
 
     public int Stage { get; set; }
+    public bool IsHit { get; set; }
 
     #endregion
 
@@ -44,15 +55,19 @@ public class Blocks : MonoBehaviour
         OnCreated?.Invoke();
     }
 
+    private void Update()
+    {
+        if (IsHit)
+        {
+            DestroyBlock();
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (Stage == blocksByStages.Length - 1)
+        if (Stage == blocksByStages.Length - 1 )
         {
-            ReloadStages();
-            gameObject.SetActive(false);
-
-            OnDestroyed?.Invoke(score);
-
+            DestroyBlock();
             return;
         }
 
@@ -73,6 +88,30 @@ public class Blocks : MonoBehaviour
 
     #endregion
 
+    #region Private methods
+
+    private void DestroyBlock()
+    {
+        ReloadStages();
+        gameObject.SetActive(false);
+
+        OnDestroyed?.Invoke(score);
+
+        Instantiate(destroyParticlePrefab, transform.position, Quaternion.identity);
+        if (NeedCreatePickUp())
+        {
+            pickUpPrefab = pickUpPrefabs[Random.Range(0, pickUpPrefabs.Length)];
+            Instantiate(pickUpPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
+    private bool NeedCreatePickUp()
+    {
+        var randomNumber = Random.Range(1, 101);
+        return pickUpCreationRate >= randomNumber;
+    }
+
+    #endregion
 
     #region Event handler
 

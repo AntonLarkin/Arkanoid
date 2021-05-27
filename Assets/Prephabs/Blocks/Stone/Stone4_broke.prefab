@@ -71,9 +71,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0ed16ce461292234cb452f4ee17bd0cb, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6037736, g: 0.5553578, b: 0.5553578, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -121,7 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8f51a13f536bc438e3d8cc5795bdd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameBehaviour: {fileID: 8435746322763190177, guid: 2902982af1a03374f93e0084881be6f9,
-    type: 3}
   blocksByStages: []
-  score: {fileID: 0}
+  score: 0
+  destroyParticlePrefab: {fileID: 0}
+  pickUpPrefabs: []
+  pickUpCreationRate: 0

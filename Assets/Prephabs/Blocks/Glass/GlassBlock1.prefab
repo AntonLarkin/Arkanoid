@@ -72,8 +72,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 71c0cf9642f75584eadc70bf859d2247, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 0a9e4c12be91f6d41a9641aa7286a9d7, type: 3}
+  m_Color: {r: 0.6971237, g: 0.65601635, b: 0.735849, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,6 +97,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blocksByStages: []
   score: 0
+  destroyParticlePrefab: {fileID: 0}
+  pickUpPrefabs: []
+  pickUpCreationRate: 0
 --- !u!61 &7552915433986349642
 BoxCollider2D:
   m_ObjectHideFlags: 0

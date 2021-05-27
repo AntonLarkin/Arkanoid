@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1712936131687762303}
   - component: {fileID: 276759506966813841}
   - component: {fileID: 1204267779041865772}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StoneSphere
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,13 +48,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8f51a13f536bc438e3d8cc5795bdd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameBehaviour: {fileID: 0}
   blocksByStages:
   - {fileID: 6023419851852523653}
   - {fileID: 5337591203527493231}
   - {fileID: 3466556839833078679}
   - {fileID: 5014200643967347360}
   score: 250
+  destroyParticlePrefab: {fileID: 2519294226295906966, guid: 59fb81a3cee02264ba36477e2968d547,
+    type: 3}
+  pickUpPrefabs:
+  - {fileID: 2471318318881323025, guid: 1841f3b7c483ef44b8a876ca0c927fa3, type: 3}
+  - {fileID: 6619197427812758345, guid: 0d33409b0729f8640a59052984676f81, type: 3}
+  - {fileID: 2471318318881323025, guid: 52545afc5403c7f4cb3ed988144784b9, type: 3}
+  - {fileID: 2471318318881323025, guid: 0e3d1eca2fadf4c4faeb82faa5ef6323, type: 3}
+  - {fileID: 6619197427812758345, guid: d491d2af4a73efa4abf6420807e6fffa, type: 3}
+  - {fileID: 6619197427812758345, guid: e598ba1f67d2d4f4395fc777507cf8f8, type: 3}
+  - {fileID: 6619197427812758345, guid: 72891f815eb11074cb143e8ebcfebc88, type: 3}
+  - {fileID: 2471318318881323025, guid: c480981f0f9a3c148bd61e18f6bf0413, type: 3}
+  - {fileID: 2471318318881323025, guid: 264c61acb56cfcc47a726915cab06cbd, type: 3}
+  - {fileID: 2471318318881323025, guid: 9b699cb1fcd357a48a6c43cc51d14c5b, type: 3}
+  - {fileID: 6619197427812758345, guid: ec30f5fd289a26b488782efbbb481a81, type: 3}
+  - {fileID: 6619197427812758345, guid: 9829e784583b42142894a19142e89213, type: 3}
+  pickUpCreationRate: 15
 --- !u!58 &1204267779041865772
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -82,6 +97,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stone_sphere2_broke
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647072818370114901, guid: 27b79ae10ccd1834ebf6c4afbfb91637,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7192879719567245720, guid: 27b79ae10ccd1834ebf6c4afbfb91637,
         type: 3}
@@ -221,6 +241,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stone_sphere3_broke
       objectReference: {fileID: 0}
+    - target: {fileID: 1259825188691702037, guid: 59d869ed06ce9b646b931958415a5f99,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1434615704218397458, guid: 59d869ed06ce9b646b931958415a5f99, type: 3}
     - {fileID: -3089995932405069770, guid: 59d869ed06ce9b646b931958415a5f99, type: 3}
@@ -248,6 +273,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stone_sphere4_broke
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630664694743849792, guid: 8b560078b6ac4d747b5dddfac356083b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7630664694743849792, guid: 8b560078b6ac4d747b5dddfac356083b,
         type: 3}
@@ -336,6 +366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stone_Sphere1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617445545431014799, guid: c81df20b6c6353742a140cf6e0f0f1f4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1617445545431014799, guid: c81df20b6c6353742a140cf6e0f0f1f4,
         type: 3}
