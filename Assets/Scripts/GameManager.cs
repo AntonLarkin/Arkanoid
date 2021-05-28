@@ -41,9 +41,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void AddScore(int score)
     {
-        Debug.Log(Score);
-        Debug.Log(score);
-
         if (score < 0 && -score > Score)
         {
             ReloadScore();

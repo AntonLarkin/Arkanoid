@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PickUpScore : BasePickUp
 {
@@ -12,8 +10,6 @@ public class PickUpScore : BasePickUp
 
 
     #region Private methods
-
- 
 
     protected override void ApplyEffect()
     {

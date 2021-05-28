@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6665095629129127854}
   - component: {fileID: 6665095629129127853}
   - component: {fileID: 6665095629129127852}
-  - component: {fileID: 8472225185655692370}
+  - component: {fileID: 1111895553238600967}
   m_Layer: 10
   m_Name: Pad
   m_TagString: Pad
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2be937f44811b494fb7d4ea588f4179f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9528302, g: 0.63776743, b: 0.6067551, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,7 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minX: -7.2
   maxX: 7.2
---- !u!60 &8472225185655692370
+  magnetVFxPrefab: {fileID: 100000, guid: 77ec3c4e07a36814fb3169ecef41b50a, type: 3}
+--- !u!60 &1111895553238600967
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,9 +123,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.04660225, y: 0.6787157}
-      - {x: -1.5364327, y: 0.4562552}
-      - {x: -1.5612324, y: 0.32588267}
-      - {x: 0.75722575, y: 0.29529405}
-      - {x: 1.5306437, y: 0.29529405}
-      - {x: 1.5451815, y: 0.43875718}
+    - - {x: -0.051742315, y: 0.6316397}
+      - {x: -1.5714285, y: 0.5}
+      - {x: -1.5665529, y: 0.40685153}
+      - {x: 1.5714285, y: 0.4091332}
+      - {x: 1.5714285, y: 0.5}

@@ -7,10 +7,15 @@ public class PadBehaviour : MonoBehaviour
     [Header("Movement Limit")]
     [SerializeField] private float minX;
     [SerializeField] private float maxX;
-
-    private Transform ballTransform;
     private float baseMinX;
     private float baseMaxX;
+
+    private Transform ballTransform;
+
+    [Header("Magnet Pad")]
+    private bool isMagnet;
+    [SerializeField] private GameObject magnetVFxPrefab;
+    private GameObject magnetVFx;
 
     #endregion
 
@@ -23,6 +28,15 @@ public class PadBehaviour : MonoBehaviour
 
         baseMinX = minX;
         baseMaxX = maxX;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isMagnet && collision.gameObject.CompareTag(Tags.Ball))
+        {
+            var ball = collision.gameObject.GetComponent<BallBehaviour>();
+            ball.MagnitBall();
+        }
     }
 
     private void Update()
@@ -53,20 +67,42 @@ public class PadBehaviour : MonoBehaviour
 
     public void ScalePadWidth(float widthModifier, float borderDifference)
     {
-        Vector3 scaledPad = new Vector3 (widthModifier, 1, 1);
+        Vector3 scaledPad = new Vector3(widthModifier, 1, 1);
         transform.localScale = scaledPad;
         minX -= borderDifference;
         maxX += borderDifference;
     }
 
-    public void ReloadPadWidth()
+    public void ReloadPad()
     {
         transform.localScale = new Vector3(1, 1, 1);
         minX = baseMinX;
         maxX = baseMaxX;
     }
 
+    public void MakeMagnetPad(float duration)
+    {
+        isMagnet = true;
+
+        if (magnetVFx == null)
+        {
+            magnetVFx = Instantiate(magnetVFxPrefab, transform);
+        }
+
+        Invoke(nameof(MakePadNormal), duration);
+    }
+
+    public void MakePadNormal()
+    {
+        isMagnet = false;
+        if (magnetVFx != null)
+        {
+            Destroy(magnetVFx);
+        }
+    }
+
     #endregion
+
 
     #region Private methods
 

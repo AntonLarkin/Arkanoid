@@ -2,9 +2,16 @@
 
 public abstract class BasePickUp : MonoBehaviour
 {
+    #region Variables
+
     [SerializeField] private int scoreBonus;
+    [SerializeField] protected float duration;
+
+    #endregion
+
 
     #region Unity lifecycle
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag(Tags.Pad))
@@ -20,6 +27,7 @@ public abstract class BasePickUp : MonoBehaviour
     }
 
     #endregion
+
 
     #region Private methods
 

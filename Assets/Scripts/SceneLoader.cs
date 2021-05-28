@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using UnityEngine.SceneManagement;
 
 public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
@@ -29,7 +28,7 @@ public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
 
     #region Public methods
 
-    public static void GoToNextScene()
+    public void GoToNextScene()
     {
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         int sceneCount = SceneManager.sceneCountInBuildSettings;

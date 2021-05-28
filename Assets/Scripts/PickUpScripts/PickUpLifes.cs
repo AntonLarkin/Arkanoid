@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PickUpLifes : BasePickUp
 {
@@ -9,6 +7,7 @@ public class PickUpLifes : BasePickUp
     [SerializeField] private bool isGainingLife;
 
     #endregion
+
 
     #region Private methods
 

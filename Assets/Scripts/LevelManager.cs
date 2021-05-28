@@ -43,9 +43,14 @@ public class LevelManager : SingletonMonoBehaviour<LevelManager>
 
         if (blockCount <= 0)
         {
-            SceneLoader.GoToNextScene();
+            Invoke(nameof(LoadNextScene), 0.2f);
             blocksDestroyed = 0;
         }
+    }
+
+    private void LoadNextScene()
+    {
+        SceneLoader.Instance.GoToNextScene();
     }
 
     private void BlockCreated()

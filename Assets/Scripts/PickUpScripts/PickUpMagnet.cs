@@ -1,22 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PickUpMagnet : BasePickUp
 {
-    #region Variables
-
-
-    #endregion
-
-
     #region Private methods
-
 
     protected override void ApplyEffect()
     {
-        BallBehaviour ball = FindObjectOfType<BallBehaviour>();
-        ball.MakeBallMagnetic();
+        PadBehaviour pad = FindObjectOfType<PadBehaviour>();
+
+        if (pad != null)
+        {
+            pad.MakeMagnetPad(duration);
+        }
     }
 
     #endregion

@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class ShowFinalScore : MonoBehaviour
 {
-
     #region Variables
 
     [SerializeField] private Text finalScore;
+
     private GameManager gameManager;
 
     #endregion
@@ -25,5 +25,4 @@ public class ShowFinalScore : MonoBehaviour
     }
 
     #endregion
-
 }

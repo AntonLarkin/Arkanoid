@@ -12,6 +12,7 @@ public class LivesManager : SingletonMonoBehaviour<LivesManager>
 
 
     #region Properties
+
     public int LivesCount => livesCount;
 
     #endregion

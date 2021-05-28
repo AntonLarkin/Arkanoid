@@ -57,7 +57,8 @@ public class GameOverSequence : MonoBehaviour
         }
         else
         {
-            pad.ReloadPadWidth();
+            pad.ReloadPad();
+            pad.MakePadNormal();
             ballBehaviour.RestartBall();
         }
     }
@@ -90,5 +91,4 @@ public class GameOverSequence : MonoBehaviour
     }
 
     #endregion
-
 }

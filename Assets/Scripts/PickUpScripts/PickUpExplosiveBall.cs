@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PickUpExplosiveBall : BasePickUp
 {
@@ -8,7 +6,7 @@ public class PickUpExplosiveBall : BasePickUp
 
     [SerializeField] private float explosionRadius;
     [SerializeField] private GameObject explosionFX;
- 
+
     #endregion
 
 
@@ -22,5 +20,4 @@ public class PickUpExplosiveBall : BasePickUp
     }
 
     #endregion
-
 }

@@ -2,7 +2,6 @@
 
 public class BallBehaviour : MonoBehaviour
 {
-
     #region Variables
 
     [Header("Base settings")]
@@ -26,7 +25,7 @@ public class BallBehaviour : MonoBehaviour
     private Transform padTransform;
     private bool isLaunched;
 
-    private bool isMagnetic;
+    private Vector2 padOffset;
 
     [Header("Explosion")]
     [SerializeField] private Sprite explosiveBall;
@@ -38,6 +37,7 @@ public class BallBehaviour : MonoBehaviour
 
     private Gradient baseTrail;
     private Sprite baseSprite;
+
     #endregion
 
 
@@ -50,15 +50,26 @@ public class BallBehaviour : MonoBehaviour
 
     #region Unity lifecycle
 
+    private void Awake()
+    {
+        padTransform = FindObjectOfType<PadBehaviour>().transform;
+
+        CalculatePadOffset();
+    }
+
+    private void Start()
+    {
+        baseTrail = gameObject.GetComponent<TrailRenderer>().colorGradient;
+        baseSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+
+        if (NeedLaunchBall())
+        {
+            LaunchBall();
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(Tags.Pad))
-        {
-            if (isMagnetic)
-            {
-                MagnitBall();
-            }
-        }
         if (collision.gameObject.CompareTag(Tags.Block))
         {
             if (isExplosive)
@@ -68,24 +79,14 @@ public class BallBehaviour : MonoBehaviour
             }
         }
     }
-    private void Start()
-    {
-        baseTrail = gameObject.GetComponent<TrailRenderer>().colorGradient;
-        baseSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
-        padTransform = FindObjectOfType<PadBehaviour>().transform;
 
-        if (GameManager.Instance.IsAutoPlay)
-        {
-            LaunchBall();
-        }
-    }
     private void Update()
     {
         if (!IsLaunched)
         {
             UpdateBallPosition();
 
-            if (Input.GetMouseButtonDown(0))
+            if (NeedLaunchBall())
             {
                 LaunchBall();
             }
@@ -96,10 +97,11 @@ public class BallBehaviour : MonoBehaviour
 
 
     #region Public methods
+
     public void UpdateBallPosition()
     {
-        Vector3 padPosition = padTransform.position;
-        padPosition.y = startPositionY;
+        Vector2 padPosition = padTransform.position;
+        padPosition -= padOffset;
         transform.position = padPosition;
     }
 
@@ -109,10 +111,10 @@ public class BallBehaviour : MonoBehaviour
         gameObject.GetComponent<TrailRenderer>().colorGradient = baseTrail;
         ReloadBallSize();
         IsLaunched = false;
-        isMagnetic = false;
         isExplosive = false;
         UpdateBallPosition();
     }
+
     public void ReloadBallSize()
     {
         transform.localScale = new Vector3(1, 1, 1);
@@ -120,18 +122,20 @@ public class BallBehaviour : MonoBehaviour
 
     public void ChangeSpeed(float speedFactor)
     {
-        var newVelocityLength = Mathf.Clamp(rb.velocity.magnitude* speedFactor, minSpeed, maxSpeed);
+        var newVelocityLength = Mathf.Clamp(rb.velocity.magnitude * speedFactor, minSpeed, maxSpeed);
         rb.velocity = rb.velocity.normalized * newVelocityLength;
     }
 
     public void ChangeSize(float sizeModifier)
     {
-        transform.localScale = new Vector3(sizeModifier,sizeModifier,sizeModifier);
+        transform.localScale = new Vector3(sizeModifier, sizeModifier, sizeModifier);
     }
 
-    public void MakeBallMagnetic()
+    public void MagnitBall()
     {
-        isMagnetic = true;
+        IsLaunched = false;
+
+        CalculatePadOffset();
     }
 
     public void MakeBallExplosive(GameObject explosionFX)
@@ -152,6 +156,11 @@ public class BallBehaviour : MonoBehaviour
 
     #region Private methods
 
+    private bool NeedLaunchBall()
+    {
+        return Input.GetMouseButtonDown(0) || GameManager.Instance.IsAutoPlay;
+    }
+
     private void LaunchBall()
     {
         rb.velocity = GetRandomDirection();
@@ -166,18 +175,13 @@ public class BallBehaviour : MonoBehaviour
         return velocity;
     }
 
-    private void MagnitBall()
-    {
-        IsLaunched = false;
-    }
-
     private void ExplodeBlocks()
     {
         var blocksInRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
-        foreach(Collider2D blockInRadius in blocksInRadius)
+        foreach (Collider2D blockInRadius in blocksInRadius)
         {
-            if(blockInRadius.CompareTag(Tags.Block))
+            if (blockInRadius.CompareTag(Tags.Block))
             {
                 hitedBlock = blockInRadius.GetComponent<Blocks>();
                 hitedBlock.IsHit = true;
@@ -185,6 +189,10 @@ public class BallBehaviour : MonoBehaviour
         }
     }
 
-    #endregion
+    private void CalculatePadOffset()
+    {
+        padOffset = padTransform.position - transform.position;
+    }
 
+    #endregion
 }

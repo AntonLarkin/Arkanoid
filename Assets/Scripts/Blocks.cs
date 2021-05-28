@@ -4,7 +4,6 @@ using Random = UnityEngine.Random;
 
 public class Blocks : MonoBehaviour
 {
-
     #region Variables
 
     [SerializeField] private GameObject[] blocksByStages;
@@ -16,7 +15,7 @@ public class Blocks : MonoBehaviour
     [SerializeField] private GameObject[] pickUpPrefabs;
     private GameObject pickUpPrefab;
 
-    [Range(1,100)]
+    [Range(1, 100)]
     [SerializeField] private int pickUpCreationRate;
 
     #endregion
@@ -55,17 +54,9 @@ public class Blocks : MonoBehaviour
         OnCreated?.Invoke();
     }
 
-    private void Update()
-    {
-        if (IsHit)
-        {
-            DestroyBlock();
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (Stage == blocksByStages.Length - 1 )
+        if (Stage == blocksByStages.Length - 1)
         {
             DestroyBlock();
             return;
@@ -74,6 +65,14 @@ public class Blocks : MonoBehaviour
         blocksByStages[Stage].SetActive(false);
         Stage++;
         blocksByStages[Stage].SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (IsHit)
+        {
+            DestroyBlock();
+        }
     }
 
     #endregion
@@ -87,6 +86,7 @@ public class Blocks : MonoBehaviour
     }
 
     #endregion
+
 
     #region Private methods
 
@@ -113,6 +113,7 @@ public class Blocks : MonoBehaviour
 
     #endregion
 
+
     #region Event handler
 
     private void ReloadStages()
@@ -126,5 +127,4 @@ public class Blocks : MonoBehaviour
     }
 
     #endregion
-
 }
