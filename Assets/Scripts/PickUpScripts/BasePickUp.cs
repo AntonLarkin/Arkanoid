@@ -7,6 +7,9 @@ public abstract class BasePickUp : MonoBehaviour
     [SerializeField] private int scoreBonus;
     [SerializeField] protected float duration;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip pickUpClip;
+
     #endregion
 
 
@@ -17,6 +20,7 @@ public abstract class BasePickUp : MonoBehaviour
         if (other.gameObject.CompareTag(Tags.Pad))
         {
             ApplyEffect();
+            SFxAudioSource.Instance.PlaySfx(pickUpClip);
             AddScoreBonus();
             Destroy(gameObject);
         }

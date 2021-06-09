@@ -144,4 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreBonus: 20
+  duration: 0
+  pickUpClip: {fileID: 8300000, guid: c1253835de9fb7a408b7b16c4782dde3, type: 3}
   sizeModifier: 1.5

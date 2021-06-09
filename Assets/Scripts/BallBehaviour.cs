@@ -27,6 +27,9 @@ public class BallBehaviour : MonoBehaviour
 
     private Vector2 padOffset;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip collisionAudioClip;
+
     [Header("Explosion")]
     [SerializeField] private Sprite explosiveBall;
     [SerializeField] private Gradient explosiveTrail;
@@ -72,6 +75,8 @@ public class BallBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(Tags.Block))
         {
+            SFxAudioSource.Instance.PlaySfx(collisionAudioClip);
+
             if (isExplosive)
             {
                 ExplodeBlocks();

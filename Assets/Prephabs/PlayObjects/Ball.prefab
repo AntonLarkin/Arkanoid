@@ -105,6 +105,7 @@ MonoBehaviour:
   maxValueX: 3
   maxSpeed: 50
   minSpeed: 5
+  collisionAudioClip: {fileID: 8300000, guid: 39e58ece35424454295644cc6ab7778c, type: 3}
   explosiveBall: {fileID: 21300000, guid: 6822fc0ecbabf0a4895120db09b7658d, type: 3}
   explosiveTrail:
     serializedVersion: 2

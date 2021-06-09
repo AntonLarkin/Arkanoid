@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
 {
@@ -57,6 +58,7 @@ public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
         OnExitButtonClicked?.Invoke();
 
         SceneManager.LoadScene(0);
+        SFxAudioSource.Instance.StopSfx();
     }
 
     public void ExitGame()

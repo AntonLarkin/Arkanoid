@@ -80,6 +80,7 @@ MonoBehaviour:
   score: 100
   destroyParticlePrefab: {fileID: 2519294226295906966, guid: 59fb81a3cee02264ba36477e2968d547,
     type: 3}
+  destoyedAudioClip: {fileID: 8300000, guid: 9efc34a1884695c4da5e86e80efa14f7, type: 3}
   pickUpPrefabs:
   - {fileID: 2471318318881323025, guid: 1841f3b7c483ef44b8a876ca0c927fa3, type: 3}
   - {fileID: 6619197427812758345, guid: 0d33409b0729f8640a59052984676f81, type: 3}

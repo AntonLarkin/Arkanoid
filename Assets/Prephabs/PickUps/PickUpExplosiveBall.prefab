@@ -134,6 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreBonus: 20
+  duration: 0
+  pickUpClip: {fileID: 8300000, guid: 6cbdf01d3ce569a49ab5413a47d446f3, type: 3}
   explosionRadius: 2
   explosionFX: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56,
     type: 3}

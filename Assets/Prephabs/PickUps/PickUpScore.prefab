@@ -133,4 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753983e5f76482b45b55e61e94243fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreBonus: 0
+  duration: 0
+  pickUpClip: {fileID: 8300000, guid: 37011f4a0d0cc4c4b8d6cfd002394978, type: 3}
   score: 300

@@ -9,7 +9,7 @@ public class GameOverSequence : MonoBehaviour
     private BallBehaviour ballBehaviour;
     private PadBehaviour pad;
     private GameManager gameManager;
-
+    
     private bool isReadyToReload;
 
     #endregion
@@ -57,6 +57,7 @@ public class GameOverSequence : MonoBehaviour
         }
         else
         {
+            SFxAudioSource.Instance.LoseLifeSfx();
             pad.ReloadPad();
             pad.MakePadNormal();
             ballBehaviour.RestartBall();

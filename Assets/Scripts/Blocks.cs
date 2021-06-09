@@ -11,6 +11,9 @@ public class Blocks : MonoBehaviour
 
     [SerializeField] private GameObject destroyParticlePrefab;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip destoyedAudioClip;
+
     [Header("Pick Up")]
     [SerializeField] private GameObject[] pickUpPrefabs;
     private GameObject pickUpPrefab;
@@ -58,6 +61,7 @@ public class Blocks : MonoBehaviour
     {
         if (Stage == blocksByStages.Length - 1)
         {
+            SFxAudioSource.Instance.PlaySfx(destoyedAudioClip);
             DestroyBlock();
             return;
         }
